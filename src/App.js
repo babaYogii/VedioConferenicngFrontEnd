@@ -1,11 +1,23 @@
 import './App.css';
-import {Routes,Route} from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
+import Home from './pages/Home';
+import { SocketProvider } from './providers/Socket';
+import { PeerProvider } from './providers/Peer';
+import Room from './pages/Room';
+
+
+
 function App() {
   return (
     <div className="App">
-      <Routes>
-        <Route path='/' element={<h1>Welcome to clone app</h1>}/>
-      </Routes>
+      <SocketProvider>
+        <PeerProvider>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/room/:roomId' element={<Room />} />
+          </Routes>
+        </PeerProvider>
+      </SocketProvider>
     </div>
   );
 }
